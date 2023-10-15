@@ -1,0 +1,137 @@
+{
+	"openapi": "3.0.1",
+	"info": {
+		"title": "OpenAPI definition",
+		"version": "v0"
+	},
+	"servers": [
+		{
+			"url": "http://localhost:8081",
+			"description": "Generated server url"
+		}
+	],
+	"paths": {
+		"/weather/get-warmest-day": {
+			"get": {
+				"tags": [
+					"weather-controller"
+				],
+				"operationId": "getWeather",
+				"parameters": [
+					{
+						"name": "getWarmestDayRequest",
+						"in": "query",
+						"required": true,
+						"schema": {
+							"$ref": "#/components/schemas/GetWarmestDayRequest"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/GetWarmestDayResponse"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/weather-request-history/user/{id}": {
+			"get": {
+				"tags": [
+					"weather-request-history-controller"
+				],
+				"operationId": "findHistoryByUserId",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"format": "uuid"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"*/*": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/WeatherRequestHistory"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"components": {
+		"schemas": {
+			"GetWarmestDayRequest": {
+				"required": [
+					"latitude",
+					"longitude",
+					"userId"
+				],
+				"type": "object",
+				"properties": {
+					"latitude": {
+						"minimum": 50.10319,
+						"exclusiveMinimum": false,
+						"type": "number"
+					},
+					"longitude": {
+						"minimum": -7.64133,
+						"exclusiveMinimum": false,
+						"type": "number"
+					},
+					"userId": {
+						"type": "string",
+						"format": "uuid"
+					}
+				}
+			},
+			"GetWarmestDayResponse": {
+				"type": "object",
+				"properties": {
+					"warmestDay": {
+						"type": "string"
+					}
+				}
+			},
+			"WeatherRequestHistory": {
+				"type": "object",
+				"properties": {
+					"resultCount": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"latitude": {
+						"type": "number"
+					},
+					"longitude": {
+						"type": "number"
+					},
+					"warmestDayIdentified": {
+						"type": "string"
+					},
+					"requestedOn": {
+						"type": "string",
+						"format": "date-time"
+					}
+				}
+			}
+		}
+	}
+}
