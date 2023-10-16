@@ -69,12 +69,6 @@ The postman collection is added to test the API. (Although its not very extensiv
 # Docs generation
 After starting the application, the following documentation can be observed.
 
-### Open-api specification
-After running this app, the open-api docs can be seen in this URL: http://localhost:8081/api-docs . Refer in git repo here -> https://github.com/im-dravo/weather-forecast/blob/main/infra-api-rest/src/main/resources/open-api.json
-
-### Swagger UI
-After running this, the swagger UI can be seen in this URL: http://localhost:8081/swagger-ui/index.html. Refer in git repo here -> https://github.com/im-dravo/weather-forecast/blob/main/Swagger-UI.png
-
 
 ### Technical Debt
 Considering the time, the following I am marking as technical debts
@@ -88,5 +82,14 @@ Considering the time, the following I am marking as technical debts
 8. Also the API keys needs to be come from external package.
 9. Create DDD based UAT tests using cucumber (for API)
 10. Logging for the app.
+
+### Open-api specification
+After running this app, the open-api docs can be seen in this URL: http://localhost:8081/api-docs. 
+Refer in git repo here -> https://github.com/im-dravo/weather-forecast/blob/main/infra-api-rest/src/main/resources/open-api.json
+
+### Swagger UI
+After running this, the swagger UI can be seen in this URL: http://localhost:8081/swagger-ui/index.html. Refer in git repo here -> https://github.com/im-dravo/weather-forecast/blob/main/Swagger-UI.png
+
+![Model](https://github.com/im-dravo/weather-forecast/blob/main/Swagger-UI.png)
  
 
