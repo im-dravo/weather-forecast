@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.weather.api.model.GetWarmestDayResponse;
+import com.weather.api.model.GetWeatherRequestHistoryResponse;
 import com.weather.domain.entity.WeatherRequestHistory;
 import com.weather.domain.model.WeatherResponse;
 import com.weather.domain.repository.WeatherRequestHistoryRepository;
@@ -38,7 +39,8 @@ public class WeatherService {
 		return weatherRequestHistoryRepository.save(weatherRequestHistory);
 	}
 
-	public List<WeatherRequestHistory> findByUserId(UUID userId) {
-		return weatherRequestHistoryRepository.findByUserId(userId);
+	public GetWeatherRequestHistoryResponse findByUserId(UUID userId) {
+		List<WeatherRequestHistory> weatherHistory = weatherRequestHistoryRepository.findByUserId(userId);
+		return new GetWeatherRequestHistoryResponse(weatherHistory);
 	}
 }

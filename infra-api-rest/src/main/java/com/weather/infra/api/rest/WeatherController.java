@@ -20,18 +20,17 @@ import jakarta.validation.Valid;
 @RequestMapping("/weather")
 public class WeatherController {
 
-    @Autowired
-    private WeatherService weatherService;
+	@Autowired
+	private WeatherService weatherService;
 
-    @Operation(summary = "Get the warmest day in upcoming 5 days, in the UK reagion only")
-    @ApiResponses(value = { 
-      @ApiResponse(responseCode = "200", description = "Found the book", 
-        content = { @Content(mediaType = "application/json", 
-          schema = @Schema(implementation = GetWarmestDayResponse.class)) }),
-      @ApiResponse(responseCode = "400", description = "Invalid coordinates supplied", 
-        content = @Content)})
-    @GetMapping("/get-warmest-day")
-    public GetWarmestDayResponse getWeather(@Valid GetWarmestDayQuery getWarmestDayRequest) {
-    	return weatherService.retrieveWeather(getWarmestDayRequest.getLatitude(), getWarmestDayRequest.getLongitude(), getWarmestDayRequest.getUserId());
-    }
+	@Operation(summary = "Get the warmest day in upcoming 5 days, in the UK reagion only")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "The waremest day is here! Yay!!", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = GetWarmestDayResponse.class)) }),
+			@ApiResponse(responseCode = "400", description = "Invalid coordinates supplied", content = @Content) })
+	@GetMapping("/get-warmest-day")
+	public GetWarmestDayResponse getWeather(@Valid GetWarmestDayQuery getWarmestDayRequest) {
+		return weatherService.retrieveWeather(getWarmestDayRequest.getLatitude(), getWarmestDayRequest.getLongitude(),
+				getWarmestDayRequest.getUserId());
+	}
 }

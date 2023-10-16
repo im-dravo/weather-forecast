@@ -1,6 +1,5 @@
 package com.weather.infra.api.rest;
 
-import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.weather.api.WeatherService;
-import com.weather.domain.entity.WeatherRequestHistory;
+import com.weather.api.model.GetWeatherRequestHistoryResponse;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 @RestController
 @RequestMapping("/weather-request-history")
@@ -19,8 +24,15 @@ public class WeatherRequestHistoryController {
 	@Autowired
     private WeatherService weatherService;
 
+	@Operation(summary = "Get a history of their client's calls. Ordered by requested date.")
+    @ApiResponses(value = { 
+      @ApiResponse(responseCode = "200", description = "History of the user's call to API", 
+        content = { @Content(mediaType = "application/json", 
+          schema = @Schema(implementation = GetWeatherRequestHistoryResponse.class)) }),
+      @ApiResponse(responseCode = "404", description = "No history found", 
+        content = @Content)})
     @GetMapping("/user/{id}")
-    public List<WeatherRequestHistory> findHistoryByUserId(@PathVariable UUID id) {
+    public GetWeatherRequestHistoryResponse getHistoryByUserId(@PathVariable UUID id) {
         return weatherService.findByUserId(id);
     }
 }
