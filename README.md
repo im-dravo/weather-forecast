@@ -67,10 +67,10 @@ TIP: if you're running the app locally, Please make sure PostgreSQL database is 
 After starting the application, the following documentation can be observed.
 
 ### Open-api specification
-After running this app, the open-api docs can be seen in this URL: http://localhost:8081/api-docs . Refer in git repo here - https://github.com/im-dravo/weather-forecast/blob/main/infra-api-rest/src/main/resources/open-api.json
+After running this app, the open-api docs can be seen in this URL: http://localhost:8081/api-docs . Refer in git repo here -> https://github.com/im-dravo/weather-forecast/blob/main/infra-api-rest/src/main/resources/open-api.json
 
 ### Swagger UI
-After running this, the swagger UI can be seen in this URL: http://localhost:8081/swagger-ui/index.html
+After running this, the swagger UI can be seen in this URL: http://localhost:8081/swagger-ui/index.html. Refer in git repo here -> https://github.com/im-dravo/weather-forecast/blob/main/Swagger-UI.png
 
 
 ### Technical Debt
@@ -82,6 +82,7 @@ Considering the time, the following I am marking as technical debts
 5. Handling the JPA and database action transaction-based
 6. Add extensive API documentations to controllers so that the swagger UI and schemas shows eloborate information about the API
 7. The external api (openweather) URL is hardcoded in infra-api-external package. Ideally would need to have this details in environment properties file and then fetched to be used in app. This way the values for different environments such as test, production etc can be easily maintains. 
-8. Also the API keys needs to be come from external package.  
+8. Also the API keys needs to be come from external package.
+9. Create DDD based UAT tests using cucumber (for API)
  
 
