@@ -34,6 +34,7 @@ Please note that, considering the time, I am marking the following tasks as tech
 8. Also the API keys needs to be come from external package.
 9. Create DDD based UAT tests using cucumber (for API)
 10. Logging for the app.
+11. Add Circuit breaker for external API call, to open weather (using Spring circuit breaker lib).
 
 ## Code structure 
 
