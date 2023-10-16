@@ -3,7 +3,7 @@
 ## Intro
 The Weather Forecast API enables users to get the specific details on weather based on 5 days forecast, such as
 1) Find the warmest day in upcoming 5 days
-2) Get the history of weather request made by user (for the user)
+2) Get the history of weather request made by user (for the user). Also it provides custom ordering by requested date or by result count
 
 
 ## Prerequisites:
@@ -14,7 +14,7 @@ The Weather Forecast API enables users to get the specific details on weather ba
 
 ## Architecture / Design patterns
 
-The design of this application is Domain Driven (DDD), which is providing custom weather information to the user. The design is based on onion architecture, with domain based convention. The domain is weather results processor and weather request history entity, with business logic. The other dependencies flows inwards towards the domain layer. The API layer depends on domain. 
+The design of this application is Domain Driven (DDD), which is providing custom weather information to the user. The design is based on onion architecture, with domain based convention. The core domain is the business logic around weather results processor and weather request history entity / repository. The other dependencies flows inwards towards the domain layer and the dependency flow is inverted towards the domain. With this Architecture and code structure, when a weather provider is changed, it can easily be replaced by another without much hassle and effort. Same goes with the database. No changes need to be done to domain.
 
 - The domain layer is core, having entities, repositories, business logic
 - The api layer is application layer without business rules (can handle transactional aspects, security aspects etc)
@@ -61,6 +61,10 @@ $ ./mvnw spring-boot:run -pl app
 
 TIP: if you're running the app locally, Please make sure PostgreSQL database is running (local installation or on docker)
 
+### Testing the app
+
+The postman collection is added to test the API. (Although its not very extensive, considering the time factor)
+
 
 # Docs generation
 
@@ -84,5 +88,6 @@ Considering the time, the following I am marking as technical debts
 7. The external api (openweather) URL is hardcoded in infra-api-external package. Ideally would need to have this details in environment properties file and then fetched to be used in app. This way the values for different environments such as test, production etc can be easily maintains. 
 8. Also the API keys needs to be come from external package.
 9. Create DDD based UAT tests using cucumber (for API)
+10. Logging for the app.
  
 

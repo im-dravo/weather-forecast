@@ -1,0 +1,150 @@
+{
+	"info": {
+		"_postman_id": "419a633f-98f3-41e9-9a8e-0f0c08d1aa6d",
+		"name": "Weather-forecast",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26276774"
+	},
+	"item": [
+		{
+			"name": "Green Path",
+			"item": [
+				{
+					"name": "GET /get-warmest-day",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/weather/get-warmest-day?latitude=51.10311&longitude=1.6515&userId=4ed1318b-ddc0-4a87-8331-e93eb3871392",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"weather",
+								"get-warmest-day"
+							],
+							"query": [
+								{
+									"key": "latitude",
+									"value": "51.10311"
+								},
+								{
+									"key": "longitude",
+									"value": "1.6515"
+								},
+								{
+									"key": "userId",
+									"value": "4ed1318b-ddc0-4a87-8331-e93eb3871392"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /weather-request-history",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/weather-request-history/user/:userId?orderBy=WEATHER_RESULT_COUNT",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"weather-request-history",
+								"user",
+								":userId"
+							],
+							"query": [
+								{
+									"key": "orderBy",
+									"value": "WEATHER_RESULT_COUNT"
+								}
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "4ed1318b-ddc0-4a87-8331-e93eb3871392"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Red Path",
+			"item": [
+				{
+					"name": "GET /get-warmest-day",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/weather/get-warmest-day?longitude=1.6515&userId=4ed1318b-ddc0-4a87-8331-e93eb3871392",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"weather",
+								"get-warmest-day"
+							],
+							"query": [
+								{
+									"key": "longitude",
+									"value": "1.6515"
+								},
+								{
+									"key": "userId",
+									"value": "4ed1318b-ddc0-4a87-8331-e93eb3871392"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /weather-request-history - invalid user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/weather-request-history/user/:userId?orderBy=WEATHER_RESULT_COUNT",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"weather-request-history",
+								"user",
+								":userId"
+							],
+							"query": [
+								{
+									"key": "orderBy",
+									"value": "WEATHER_RESULT_COUNT"
+								}
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "ddf19fab-59bf-47a1-b957-8c9f55d4c5fd"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
