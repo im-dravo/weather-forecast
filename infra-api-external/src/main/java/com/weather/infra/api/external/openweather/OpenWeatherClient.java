@@ -15,6 +15,9 @@ import com.weather.domain.service.WeatherProvider;
 import com.weather.infra.api.external.openweather.model.List;
 import com.weather.infra.api.external.openweather.model.OpenweatherResponse;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 public class OpenWeatherClient implements WeatherProvider {
 
 	@Autowired
@@ -33,10 +36,10 @@ public class OpenWeatherClient implements WeatherProvider {
 
 		return this.transformOpenweatherResponse(openweatherResponse);
 	}
-	
 
 	/**
 	 * Method that transforms the Openweather response to domain weather response.
+	 * 
 	 * @param openweatherResponse
 	 * @return
 	 */
@@ -45,7 +48,8 @@ public class OpenWeatherClient implements WeatherProvider {
 
 		ArrayList<Weather> weatherList = new ArrayList<>();
 		fiveDaysOpenweatherList.forEach((weather) -> {
-			weatherList.add(new Weather(weather.getMain().getTemp_max(), weather.getMain().getHumidity(), weather.getDt_txt()));
+			weatherList.add(
+					new Weather(weather.getMain().getTemp_max(), weather.getMain().getHumidity(), weather.getDt_txt()));
 		});
 
 		Coordinates coordinates = new Coordinates(openweatherResponse.getCity().getCoord().getLat(),

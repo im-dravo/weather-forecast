@@ -19,7 +19,10 @@ import com.weather.domain.repository.WeatherRequestHistoryRepository;
 import com.weather.domain.service.WeatherDataProcessor;
 import com.weather.domain.service.WeatherProvider;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class WeatherService {
 
 	@Autowired
@@ -35,16 +38,17 @@ public class WeatherService {
 	public GetWarmestDayResponse retrieveWeather(BigDecimal latitude, BigDecimal longitude, UUID userId) {
 		WeatherResponse weatherResponse = weatherProvider.retrieveWeather(latitude, longitude);
 		Optional<String> warmestDay = weatherDataProcessor.getWarmestDay(weatherResponse);
-		if(warmestDay.isPresent()) {
-		this.saveWeatherRequestHistory(
-				new WeatherRequestHistory(userId, weatherResponse.getResultCount(), latitude, longitude, warmestDay.get()));
-		return new GetWarmestDayResponse(warmestDay.get());
+		if (warmestDay.isPresent()) {
+			this.saveWeatherRequestHistory(new WeatherRequestHistory(userId, weatherResponse.getResultCount(), latitude,
+					longitude, warmestDay.get()));
+			return new GetWarmestDayResponse(warmestDay.get());
 		} else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Weather not found");
 		}
-		
+
 	}
 
+	@Transactional
 	public WeatherRequestHistory saveWeatherRequestHistory(WeatherRequestHistory weatherRequestHistory) {
 		return weatherRequestHistoryRepository.save(weatherRequestHistory);
 	}
