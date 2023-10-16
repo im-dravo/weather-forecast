@@ -20,18 +20,4 @@ public class WeatherDataProcessor {
 		return warmestWeather.getDateTime().split(" ")[0];
 		
 	}
-	
-//	TODO
-//  return this.formatDate(warmestWeather.getDateTime());
-//	private Date formatDate(String dateString) {
-//		Date date = null;
-//		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
-//		try {
-//			date = (Date) formatter.parse(dateString);
-//			return date;
-//		} catch (ParseException e) {
-//			e.printStackTrace();
-//		}
-//		return date;
-//	}
 }

@@ -33,7 +33,13 @@ public class OpenWeatherClient implements WeatherProvider {
 
 		return this.transformOpenweatherResponse(openweatherResponse);
 	}
+	
 
+	/**
+	 * Method that transforms the Openweather response to domain weather response.
+	 * @param openweatherResponse
+	 * @return
+	 */
 	private WeatherResponse transformOpenweatherResponse(OpenweatherResponse openweatherResponse) {
 		ArrayList<List> fiveDaysOpenweatherList = openweatherResponse.getList();
 

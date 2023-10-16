@@ -9,8 +9,12 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import jakarta.validation.constraints.DecimalMin;
+import lombok.Getter;
+import lombok.Setter;
 
-public class GetWarmestDayRequest {
+@Getter
+@Setter
+public class GetWarmestDayQuery {
 	@NotBlank
 	@NotNull
 	@DecimalMin(value = "50.10319", inclusive = true, message = "Invalid latitude. Only allowed to access weather for UK coordinates")
