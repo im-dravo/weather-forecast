@@ -17,7 +17,7 @@ import com.weather.domain.entity.WeatherRequestHistory;
 import com.weather.domain.model.WeatherResponse;
 import com.weather.domain.repository.WeatherRequestHistoryRepository;
 import com.weather.domain.service.WeatherDataProcessor;
-import com.weather.domain.service.WeatherProvider;
+import com.weather.domain.service.WeatherClient;
 
 import lombok.RequiredArgsConstructor;
 
@@ -26,7 +26,7 @@ import lombok.RequiredArgsConstructor;
 public class WeatherService {
 
 	@Autowired
-	private WeatherProvider weatherProvider;
+	private WeatherClient weatherClient;
 
 	@Autowired
 	private WeatherDataProcessor weatherDataProcessor;
@@ -36,7 +36,7 @@ public class WeatherService {
 
 	@Transactional
 	public GetWarmestDayResponse retrieveWeather(BigDecimal latitude, BigDecimal longitude, UUID userId) {
-		WeatherResponse weatherResponse = weatherProvider.retrieveWeather(latitude, longitude);
+		WeatherResponse weatherResponse = weatherClient.retrieveWeather(latitude, longitude);
 		Optional<String> warmestDay = weatherDataProcessor.getWarmestDay(weatherResponse);
 		if (warmestDay.isPresent()) {
 			this.saveWeatherRequestHistory(new WeatherRequestHistory(userId, weatherResponse.getResultCount(), latitude,

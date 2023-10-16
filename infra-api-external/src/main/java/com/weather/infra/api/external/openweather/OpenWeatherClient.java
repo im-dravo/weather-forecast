@@ -11,14 +11,14 @@ import com.weather.domain.model.City;
 import com.weather.domain.model.Coordinates;
 import com.weather.domain.model.Weather;
 import com.weather.domain.model.WeatherResponse;
-import com.weather.domain.service.WeatherProvider;
+import com.weather.domain.service.WeatherClient;
 import com.weather.infra.api.external.openweather.model.List;
 import com.weather.infra.api.external.openweather.model.OpenweatherResponse;
 
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class OpenWeatherClient implements WeatherProvider {
+public class OpenWeatherClient implements WeatherClient {
 
 	@Autowired
 	private WebClient webClient;

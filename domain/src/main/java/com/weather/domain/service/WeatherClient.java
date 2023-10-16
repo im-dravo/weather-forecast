@@ -4,6 +4,6 @@ import java.math.BigDecimal;
 
 import com.weather.domain.model.WeatherResponse;
 
-public interface WeatherProvider {
+public interface WeatherClient {
 	WeatherResponse retrieveWeather(BigDecimal latitude, BigDecimal longitude);
 }

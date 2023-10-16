@@ -22,13 +22,13 @@ import com.weather.domain.entity.WeatherRequestHistory;
 import com.weather.domain.model.WeatherResponse;
 import com.weather.domain.repository.WeatherRequestHistoryRepository;
 import com.weather.domain.service.WeatherDataProcessor;
-import com.weather.domain.service.WeatherProvider;
+import com.weather.domain.service.WeatherClient;
 
 @ExtendWith(MockitoExtension.class)
 class WeatherServiceTest {
 
 	@Mock
-    private WeatherProvider weatherProvider;
+    private WeatherClient weatherClient;
     
     @Mock
     private WeatherDataProcessor weatherDataProcessor;
@@ -49,7 +49,7 @@ class WeatherServiceTest {
     	String mockDate = "2023-10-10";
     	// Given
     	WeatherResponse weatherResponse = new WeatherResponse();
-    	when(weatherProvider.retrieveWeather(any(), any())).thenReturn(weatherResponse);
+    	when(weatherClient.retrieveWeather(any(), any())).thenReturn(weatherResponse);
     	when(weatherDataProcessor.getWarmestDay(any())).thenReturn(Optional.of(mockDate));
     	when(weatherRequestHistoryRepository.save(any())).thenReturn(new WeatherRequestHistory());
         BigDecimal latitude = new BigDecimal(50.222222);
@@ -63,7 +63,7 @@ class WeatherServiceTest {
 
         // Then
         assertEquals(warmestDayResponse.getWarmestDay(), "2023-10-10");
-        verify(weatherProvider, times(1)).retrieveWeather(any(), any());
+        verify(weatherClient, times(1)).retrieveWeather(any(), any());
         verify(weatherDataProcessor, times(1)).getWarmestDay(any());
         verify(weatherRequestHistoryRepository, times(1)).save(any());
     }
