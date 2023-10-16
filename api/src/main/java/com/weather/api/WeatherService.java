@@ -7,6 +7,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.weather.api.model.GetWarmestDayResponse;
@@ -29,6 +30,7 @@ public class WeatherService {
 	@Autowired
 	private WeatherRequestHistoryRepository weatherRequestHistoryRepository;
 
+	@Transactional
 	public GetWarmestDayResponse retrieveWeather(BigDecimal latitude, BigDecimal longitude, UUID userId) {
 		WeatherResponse weatherResponse = weatherProvider.retrieveWeather(latitude, longitude);
 		String warmestDay = weatherDataProcessor.getWarmestDay(weatherResponse);
@@ -41,6 +43,7 @@ public class WeatherService {
 		return weatherRequestHistoryRepository.save(weatherRequestHistory);
 	}
 
+	@Transactional(readOnly = true)
 	public GetWeatherRequestHistoryResponse findByUserId(UUID userId, String orderingField) {
 		List<WeatherRequestHistory> weatherHistory = weatherRequestHistoryRepository.findByUserId(userId,
 				orderingField);

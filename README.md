@@ -22,6 +22,19 @@ The design of this application is based on Onion architecture and Domain Driven 
 - The infra-jpa connects to DB (postgres in this case)
 - The infra-api-external connects with Openweather API
 
+### Technical Debt
+Please note that, considering the time, I am marking the following tasks as technical debts. 
+1. Security of the API. The application typically needs to be secured with basic authentication, or token based authentication
+2. Extensive testing. 
+3. Creating the swagger/open-api doc first and then generating the API POJOs based on that using maven plugin. 
+4. Customising the error responses, with the custom error message and error transaction id
+5. Handling the JPA and database action transaction-based
+6. Add extensive API documentations to controllers so that the swagger UI and schemas shows eloborate information about the API
+7. The external api (openweather) URL is hardcoded in infra-api-external package. Ideally would need to have this details in environment properties file and then fetched to be used in app. This way the values for different environments such as test, production etc can be easily maintains. 
+8. Also the API keys needs to be come from external package.
+9. Create DDD based UAT tests using cucumber (for API)
+10. Logging for the app.
+
 ## Code structure 
 
 The application is built as multi-module maven project, where each layer is an independent maven project, connected by the parent project.
@@ -69,19 +82,6 @@ The postman collection is added to test the API. (Although its not very extensiv
 # Docs generation
 After starting the application, the following documentation can be observed.
 
-
-### Technical Debt
-Considering the time, the following I am marking as technical debts
-1. Security of the API. The application typically needs to be secured with basic authentication, or token based authentication
-2. Extensive testing. 
-3. Creating the swagger/open-api doc first and then generating the API POJOs based on that using maven plugin. 
-4. Customising the error responses, with the custom error message and error transaction id
-5. Handling the JPA and database action transaction-based
-6. Add extensive API documentations to controllers so that the swagger UI and schemas shows eloborate information about the API
-7. The external api (openweather) URL is hardcoded in infra-api-external package. Ideally would need to have this details in environment properties file and then fetched to be used in app. This way the values for different environments such as test, production etc can be easily maintains. 
-8. Also the API keys needs to be come from external package.
-9. Create DDD based UAT tests using cucumber (for API)
-10. Logging for the app.
 
 ### Open-api specification
 After running this app, the open-api docs can be seen in this URL: http://localhost:8081/api-docs. 
