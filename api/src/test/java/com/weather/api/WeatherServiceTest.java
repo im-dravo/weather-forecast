@@ -41,7 +41,7 @@ class WeatherServiceTest {
 
     @BeforeEach
     void setUp() {
-    	weatherService = new WeatherService(weatherProvider, weatherDataProcessor, weatherRequestHistoryRepository);
+    	weatherService = new WeatherService();
     }
 
     //@Test
