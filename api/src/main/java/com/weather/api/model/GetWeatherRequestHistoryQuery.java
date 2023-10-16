@@ -15,14 +15,6 @@ public class GetWeatherRequestHistoryQuery {
 	@Enumerated()
 	@Nullable
 	private ORDER_FIELD orderBy;
-
-	public ORDER_FIELD getOrderBy() {
-		return orderBy;
-	}
-
-	public void setOrderField(ORDER_FIELD orderBy) {
-		this.orderBy = orderBy;
-	}
 	
 	public String customOrderByField() {
 		if(this.orderBy == null) { 

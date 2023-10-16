@@ -6,11 +6,9 @@ import com.weather.domain.entity.WeatherRequestHistory;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Setter
-@ToString
 public class GetWeatherRequestHistoryResponse{
 	public enum ORDER_FIELD {
 	    REQUESTED_ON, RESULT_COUNT;
@@ -22,12 +20,4 @@ public class GetWeatherRequestHistoryResponse{
 	}
 
 	private List<WeatherRequestHistory> history;
-
-	public List<WeatherRequestHistory> getHistory() {
-		return history;
-	}
-
-	public void setHistory(List<WeatherRequestHistory> history) {
-		this.history = history;
-	}
 }

@@ -1,8 +1,11 @@
 package com.weather.domain.model;
 
-import lombok.ToString;
+import lombok.Getter;
+import lombok.Setter;
 
-@ToString
+@Getter
+@Setter
+
 public class Coordinates {
 	private double latitude;
 	private double longitude;
@@ -11,18 +14,5 @@ public class Coordinates {
 		super();
 		this.latitude = d;
 		this.longitude = e;
-	}
-	
-	public double getLatitude() {
-		return latitude;
-	}
-	public void setLatitude(double latitude) {
-		this.latitude = latitude;
-	}
-	public double getLongitude() {
-		return longitude;
-	}
-	public void setLongitude(double longitude) {
-		this.longitude = longitude;
 	}
 }

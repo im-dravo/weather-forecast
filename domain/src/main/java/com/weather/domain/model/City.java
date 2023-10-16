@@ -1,8 +1,10 @@
 package com.weather.domain.model;
 
-import lombok.ToString;
+import lombok.Getter;
+import lombok.Setter;
 
-@ToString
+@Getter
+@Setter
 public class City{
 	private String cityName;
     private Coordinates coordinates;
@@ -12,25 +14,6 @@ public class City{
 		super();
 		this.cityName = cityName;
 		this.coordinates = coordinates;
-		this.country = country;
-	}
-    
-	public String getCityName() {
-		return cityName;
-	}
-	public void setCityName(String cityName) {
-		this.cityName = cityName;
-	}
-	public Coordinates getCoordinates() {
-		return coordinates;
-	}
-	public void setCoordinates(Coordinates coordinates) {
-		this.coordinates = coordinates;
-	}
-	public String getCountry() {
-		return country;
-	}
-	public void setCountry(String country) {
 		this.country = country;
 	}
 }
