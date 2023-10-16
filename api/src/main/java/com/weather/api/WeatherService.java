@@ -2,6 +2,7 @@ package com.weather.api;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,10 +34,15 @@ public class WeatherService {
 	@Transactional
 	public GetWarmestDayResponse retrieveWeather(BigDecimal latitude, BigDecimal longitude, UUID userId) {
 		WeatherResponse weatherResponse = weatherProvider.retrieveWeather(latitude, longitude);
-		String warmestDay = weatherDataProcessor.getWarmestDay(weatherResponse);
+		Optional<String> warmestDay = weatherDataProcessor.getWarmestDay(weatherResponse);
+		if(warmestDay.isPresent()) {
 		this.saveWeatherRequestHistory(
-				new WeatherRequestHistory(userId, weatherResponse.getResultCount(), latitude, longitude, warmestDay));
-		return new GetWarmestDayResponse(warmestDay);
+				new WeatherRequestHistory(userId, weatherResponse.getResultCount(), latitude, longitude, warmestDay.get()));
+		return new GetWarmestDayResponse(warmestDay.get());
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Weather not found");
+		}
+		
 	}
 
 	public WeatherRequestHistory saveWeatherRequestHistory(WeatherRequestHistory weatherRequestHistory) {
