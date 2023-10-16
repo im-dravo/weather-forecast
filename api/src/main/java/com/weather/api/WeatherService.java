@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.weather.api.model.GetWarmestDayResponse;
 import com.weather.api.model.GetWeatherRequestHistoryResponse;
@@ -39,8 +41,12 @@ public class WeatherService {
 		return weatherRequestHistoryRepository.save(weatherRequestHistory);
 	}
 
-	public GetWeatherRequestHistoryResponse findByUserId(UUID userId) {
-		List<WeatherRequestHistory> weatherHistory = weatherRequestHistoryRepository.findByUserId(userId);
+	public GetWeatherRequestHistoryResponse findByUserId(UUID userId, String orderingField) {
+		List<WeatherRequestHistory> weatherHistory = weatherRequestHistoryRepository.findByUserId(userId,
+				orderingField);
+		if (weatherHistory.isEmpty()) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No history found for requested user.");
+		}
 		return new GetWeatherRequestHistoryResponse(weatherHistory);
 	}
 }

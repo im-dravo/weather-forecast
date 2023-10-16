@@ -10,6 +10,6 @@ import com.weather.domain.entity.WeatherRequestHistory;
 public interface WeatherRequestHistoryRepository {	
 	WeatherRequestHistory save(WeatherRequestHistory weatherRequestHistory);
 	
-	@Query("SELECT wh FROM WeatherRequestHistory wh WHERE wh.userId = :userId ORDER BY wh.requestedOn DESC")
-	List<WeatherRequestHistory> findByUserId(UUID userId);
+	@Query("SELECT wh FROM WeatherRequestHistory wh WHERE wh.userId = :userId ORDER BY :orderingField DESC")
+	List<WeatherRequestHistory> findByUserId(UUID userId, String orderingField);
 }
