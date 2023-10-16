@@ -16,6 +16,7 @@
 				"tags": [
 					"weather-controller"
 				],
+				"summary": "Get the warmest day in upcoming 5 days, in the UK reagion only",
 				"operationId": "getWeather",
 				"parameters": [
 					{
@@ -23,15 +24,18 @@
 						"in": "query",
 						"required": true,
 						"schema": {
-							"$ref": "#/components/schemas/GetWarmestDayRequest"
+							"$ref": "#/components/schemas/GetWarmestDayQuery"
 						}
 					}
 				],
 				"responses": {
+					"400": {
+						"description": "Invalid coordinates supplied"
+					},
 					"200": {
-						"description": "OK",
+						"description": "The waremest day is here! Yay!!",
 						"content": {
-							"*/*": {
+							"application/json": {
 								"schema": {
 									"$ref": "#/components/schemas/GetWarmestDayResponse"
 								}
@@ -41,36 +45,45 @@
 				}
 			}
 		},
-		"/weather-request-history/user/{id}": {
+		"/weather-request-history/user/{userId}": {
 			"get": {
 				"tags": [
 					"weather-request-history-controller"
 				],
-				"operationId": "findHistoryByUserId",
+				"summary": "Get a history of their client's calls. By default ordered by requested date. \n The ordering can be explicity requested based on requested date or weather result count",
+				"operationId": "getHistoryByUserId",
 				"parameters": [
 					{
-						"name": "id",
+						"name": "userId",
 						"in": "path",
 						"required": true,
 						"schema": {
 							"type": "string",
 							"format": "uuid"
 						}
+					},
+					{
+						"name": "getHistoryQuery",
+						"in": "query",
+						"required": true,
+						"schema": {
+							"$ref": "#/components/schemas/GetWeatherRequestHistoryQuery"
+						}
 					}
 				],
 				"responses": {
 					"200": {
-						"description": "OK",
+						"description": "History of the user's call to API",
 						"content": {
-							"*/*": {
+							"application/json": {
 								"schema": {
-									"type": "array",
-									"items": {
-										"$ref": "#/components/schemas/WeatherRequestHistory"
-									}
+									"$ref": "#/components/schemas/GetWeatherRequestHistoryResponse"
 								}
 							}
 						}
+					},
+					"404": {
+						"description": "No history found"
 					}
 				}
 			}
@@ -78,7 +91,7 @@
 	},
 	"components": {
 		"schemas": {
-			"GetWarmestDayRequest": {
+			"GetWarmestDayQuery": {
 				"required": [
 					"latitude",
 					"longitude",
@@ -87,13 +100,9 @@
 				"type": "object",
 				"properties": {
 					"latitude": {
-						"minimum": 50.10319,
-						"exclusiveMinimum": false,
 						"type": "number"
 					},
 					"longitude": {
-						"minimum": -7.64133,
-						"exclusiveMinimum": false,
 						"type": "number"
 					},
 					"userId": {
@@ -107,6 +116,37 @@
 				"properties": {
 					"warmestDay": {
 						"type": "string"
+					}
+				}
+			},
+			"GetWeatherRequestHistoryQuery": {
+				"type": "object",
+				"properties": {
+					"orderBy": {
+						"type": "string",
+						"enum": [
+							"WEATHER_HISTORY_REQUESTED_DATE",
+							"WEATHER_RESULT_COUNT"
+						]
+					},
+					"orderField": {
+						"type": "string",
+						"writeOnly": true,
+						"enum": [
+							"WEATHER_HISTORY_REQUESTED_DATE",
+							"WEATHER_RESULT_COUNT"
+						]
+					}
+				}
+			},
+			"GetWeatherRequestHistoryResponse": {
+				"type": "object",
+				"properties": {
+					"history": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/WeatherRequestHistory"
+						}
 					}
 				}
 			},
