@@ -18,7 +18,7 @@ public class WeatherDataProcessor {
 	public Optional<String> getWarmestDay(WeatherResponse weatherResponse) {
 		ArrayList<Weather> weatherList = weatherResponse.getWeatherList();
 		List<Weather> weatherListOrderedByDateAndHumidity = weatherList.stream()
-				.sorted(Comparator.comparing(Weather::getMaximumTemperature).thenComparingLong(Weather::getHumidity).reversed())
+				.sorted(Comparator.comparing(Weather::getMaximumTemperature).reversed().thenComparingInt(Weather::getHumidity))
 				.collect(Collectors.toList());
 		
 		if(weatherListOrderedByDateAndHumidity.isEmpty()) {
