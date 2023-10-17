@@ -48,4 +48,20 @@ class WeatherDataProcessorTest {
         // then
 		assertEquals(result.get(), "2023-10-16");
     }
+	
+	@Test
+    void testGetWarmestDayWithNoWeatherResults() {
+        // given
+		WeatherDataProcessor dataProcessor = new WeatherDataProcessor();
+		WeatherResponse mockWeatherResponse = new WeatherResponse();
+		ArrayList<Weather> weatherList = new ArrayList<>();
+		mockWeatherResponse.setWeatherList(weatherList);
+		
+
+        // and when
+		Optional<String> result = dataProcessor.getWarmestDay(mockWeatherResponse);
+
+        // then
+		assertEquals(result.isEmpty(), true);
+    }
 }
