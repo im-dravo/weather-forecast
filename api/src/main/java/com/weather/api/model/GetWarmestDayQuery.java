@@ -14,18 +14,18 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class GetWarmestDayQuery {
-	@NotNull
-	@DecimalMin(value = "50.10319", inclusive = true, message = "Invalid latitude. Only allowed to access weather for UK coordinates")
-	@DecimalMax(value = "60.15456", inclusive = true, message = "Invalid latitude. Only allowed to access weather for UK coordinates")
+	@NotNull(message = "Latitude is required")
+	@DecimalMin(value = "50.00000", inclusive = true, message = "Invalid latitude. Only allowed to access weather for UK and Norther Ireland")
+	@DecimalMax(value = "60.00000", inclusive = true, message = "Invalid latitude. Only allowed to access weather for UK and Norther Ireland")
 	@Digits(integer=2, fraction=6)
 	private Double latitude;
 
-	@NotNull
-	@DecimalMin(value = "-7.64133", inclusive = true, message = "Invalid longitude. Only allowed to access weather for UK coordinates")
-	@DecimalMax(value = "1.75159", inclusive = true, message = "Invalid longitude. Only allowed to access weather for UK coordinates")
+	@NotNull(message = "Longitude is required")
+	@DecimalMin(value = "-10.00000", inclusive = true, message = "Invalid longitude. Only allowed to access weather for UK and Norther Ireland")
+	@DecimalMax(value = "2.00000", inclusive = true, message = "Invalid longitude. Only allowed to access weather for UK and Norther Ireland")
 	@Digits(integer=2, fraction=6)
 	private Double longitude;
 	
-	@NotNull
+	@NotNull(message = "UserId is required")
 	private UUID userId;
 }

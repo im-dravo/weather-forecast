@@ -27,9 +27,11 @@ public class WeatherController {
 
 	@Operation(summary = "Get the warmest day in upcoming 5 days, in the UK region and Northern Ireland only")
 	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "The waremest day is here! Yay!!", content = {
+			@ApiResponse(responseCode = "200", description = "The warmest day is here! Yay!!", content = {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = GetWarmestDayResponse.class)) }),
-			@ApiResponse(responseCode = "400", description = "Invalid coordinates supplied", content = @Content) })
+			@ApiResponse(responseCode = "400", description = "Invalid coordinates supplied", content = @Content),
+			@ApiResponse(responseCode = "502", description = "Service providers unavailable", content = @Content),
+			@ApiResponse(responseCode = "500", description = "Unknown Error", content = @Content) })
 	@GetMapping("/get-warmest-day")
 	public ResponseEntity<GetWarmestDayResponse> getWeather(@Valid GetWarmestDayQuery getWarmestDayRequest) {
 		return new ResponseEntity<GetWarmestDayResponse>(

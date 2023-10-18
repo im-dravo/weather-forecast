@@ -16,7 +16,7 @@
 				"tags": [
 					"weather-controller"
 				],
-				"summary": "Get the warmest day in upcoming 5 days, in the UK reagion only",
+				"summary": "Get the warmest day in upcoming 5 days, in the UK region and Northern Ireland only",
 				"operationId": "getWeather",
 				"parameters": [
 					{
@@ -29,8 +29,28 @@
 					}
 				],
 				"responses": {
+					"400": {
+						"description": "Invalid coordinates supplied",
+						"content": {}
+					},
+					"404": {
+						"description": "Not Found",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorDTO"
+								}
+							}
+						}
+					},
+					"502": {
+						"description": "Service providers unavailable"
+					},
+					"500": {
+						"description": "Unknown Error"
+					},
 					"200": {
-						"description": "The waremest day is here! Yay!!",
+						"description": "The warmest day is here! Yay!!",
 						"content": {
 							"application/json": {
 								"schema": {
@@ -38,9 +58,6 @@
 								}
 							}
 						}
-					},
-					"400": {
-						"description": "Invalid coordinates supplied"
 					}
 				}
 			}
@@ -72,8 +89,19 @@
 					}
 				],
 				"responses": {
+					"400": {
+						"description": "Bad Request",
+						"content": {
+							"*/*": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorDTO"
+								}
+							}
+						}
+					},
 					"404": {
-						"description": "No history found"
+						"description": "No history found",
+						"content": {}
 					},
 					"200": {
 						"description": "History of the user's call to API",
@@ -91,6 +119,26 @@
 	},
 	"components": {
 		"schemas": {
+			"ErrorDTO": {
+				"type": "object",
+				"properties": {
+					"error": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"statusCode": {
+						"type": "string",
+						"enum": [
+							"ERR400",
+							"ERR404",
+							"ERR500",
+							"ERR409"
+						]
+					}
+				}
+			},
 			"GetWarmestDayQuery": {
 				"required": [
 					"latitude",
@@ -100,10 +148,20 @@
 				"type": "object",
 				"properties": {
 					"latitude": {
-						"type": "number"
+						"maximum": 60.00000,
+						"exclusiveMaximum": false,
+						"minimum": 50.00000,
+						"exclusiveMinimum": false,
+						"type": "number",
+						"format": "double"
 					},
 					"longitude": {
-						"type": "number"
+						"maximum": 2.00000,
+						"exclusiveMaximum": false,
+						"minimum": -10.00000,
+						"exclusiveMinimum": false,
+						"type": "number",
+						"format": "double"
 					},
 					"userId": {
 						"type": "string",
@@ -150,10 +208,12 @@
 						"format": "int32"
 					},
 					"latitude": {
-						"type": "number"
+						"type": "number",
+						"format": "double"
 					},
 					"longitude": {
-						"type": "number"
+						"type": "number",
+						"format": "double"
 					},
 					"warmestDayIdentified": {
 						"type": "string"

@@ -2,9 +2,9 @@ package com.weather.infra.api.rest;
 
 import java.util.UUID;
 
-import jakarta.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +19,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/weather-request-history")
@@ -34,8 +35,9 @@ public class WeatherRequestHistoryController {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = GetWeatherRequestHistoryResponse.class)) }),
 			@ApiResponse(responseCode = "404", description = "No history found", content = @Content) })
 	@GetMapping("/user/{userId}")
-	public GetWeatherRequestHistoryResponse getHistoryByUserId(@PathVariable UUID userId,
+	public ResponseEntity<GetWeatherRequestHistoryResponse> getHistoryByUserId(@PathVariable UUID userId,
 			@Valid GetWeatherRequestHistoryQuery getHistoryQuery) {
-		return weatherService.findByUserId(userId, getHistoryQuery.customOrderByField());
+		return new ResponseEntity<GetWeatherRequestHistoryResponse>(
+				weatherService.findByUserId(userId, getHistoryQuery.customOrderByField()), HttpStatus.OK);
 	}
 }

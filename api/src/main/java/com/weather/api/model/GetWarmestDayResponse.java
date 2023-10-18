@@ -9,12 +9,4 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class GetWarmestDayResponse {
 	private String warmestDay;
-
-	public String getWarmestDay() {
-		return warmestDay;
-	}
-
-	public void setWarmestDay(String warmestDay) {
-		this.warmestDay = warmestDay;
-	}
 }
