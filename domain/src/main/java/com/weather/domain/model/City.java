@@ -1,19 +1,14 @@
 package com.weather.domain.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class City{
 	private String cityName;
     private Coordinates coordinates;
     private String country;
-    
-    public City(String cityName, Coordinates coordinates, String country) {
-		super();
-		this.cityName = cityName;
-		this.coordinates = coordinates;
-		this.country = country;
-	}
 }

@@ -29,9 +29,6 @@
 					}
 				],
 				"responses": {
-					"400": {
-						"description": "Invalid coordinates supplied"
-					},
 					"200": {
 						"description": "The waremest day is here! Yay!!",
 						"content": {
@@ -41,6 +38,9 @@
 								}
 							}
 						}
+					},
+					"400": {
+						"description": "Invalid coordinates supplied"
 					}
 				}
 			}
@@ -72,6 +72,9 @@
 					}
 				],
 				"responses": {
+					"404": {
+						"description": "No history found"
+					},
 					"200": {
 						"description": "History of the user's call to API",
 						"content": {
@@ -81,9 +84,6 @@
 								}
 							}
 						}
-					},
-					"404": {
-						"description": "No history found"
 					}
 				}
 			}
@@ -124,14 +124,6 @@
 				"properties": {
 					"orderBy": {
 						"type": "string",
-						"enum": [
-							"WEATHER_HISTORY_REQUESTED_DATE",
-							"WEATHER_RESULT_COUNT"
-						]
-					},
-					"orderField": {
-						"type": "string",
-						"writeOnly": true,
 						"enum": [
 							"WEATHER_HISTORY_REQUESTED_DATE",
 							"WEATHER_RESULT_COUNT"

@@ -1,18 +1,13 @@
 package com.weather.domain.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
-public class Weather{
-	public Weather(double maximumTemperature, int humidity, String dateTime) {
-		super();
-		this.maximumTemperature = maximumTemperature;
-		this.humidity = humidity;
-		this.dateTime = dateTime;
-	}
-
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Weather {
 	private double maximumTemperature;
 	private int humidity;
 	private String dateTime;

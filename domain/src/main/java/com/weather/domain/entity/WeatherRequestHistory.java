@@ -1,6 +1,5 @@
 package com.weather.domain.entity;
 
-import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.UUID;
 
@@ -11,8 +10,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.Getter;
 import lombok.AccessLevel;
+import lombok.Getter;
 
 @Entity
 public class WeatherRequestHistory {
@@ -28,10 +27,10 @@ public class WeatherRequestHistory {
 	private int resultCount;
 
 	@Getter(AccessLevel.PUBLIC)
-	private BigDecimal latitude;
+	private Double latitude;
 
 	@Getter(AccessLevel.PUBLIC)
-	private BigDecimal longitude;
+	private Double longitude;
 
 	@Getter(AccessLevel.PUBLIC)
 	private String warmestDayIdentified;
@@ -44,7 +43,7 @@ public class WeatherRequestHistory {
 	public WeatherRequestHistory() {
 	}
 
-	public WeatherRequestHistory(UUID userId, int resultCount, BigDecimal latitude, BigDecimal longitude,
+	public WeatherRequestHistory(UUID userId, int resultCount, Double latitude, Double longitude,
 			String warmestDayIdentified) {
 		this.userId = userId;
 		this.resultCount = resultCount;

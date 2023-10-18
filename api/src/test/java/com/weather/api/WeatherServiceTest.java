@@ -6,12 +6,10 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.math.BigDecimal;
 import java.util.Optional;
 import java.util.UUID;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -21,8 +19,8 @@ import com.weather.api.model.GetWarmestDayResponse;
 import com.weather.domain.entity.WeatherRequestHistory;
 import com.weather.domain.model.WeatherResponse;
 import com.weather.domain.repository.WeatherRequestHistoryRepository;
-import com.weather.domain.service.WeatherDataProcessor;
 import com.weather.domain.service.WeatherClient;
+import com.weather.domain.service.WeatherDataProcessor;
 
 @ExtendWith(MockitoExtension.class)
 class WeatherServiceTest {
@@ -52,8 +50,8 @@ class WeatherServiceTest {
     	when(weatherClient.retrieveWeather(any(), any())).thenReturn(weatherResponse);
     	when(weatherDataProcessor.getWarmestDay(any())).thenReturn(Optional.of(mockDate));
     	when(weatherRequestHistoryRepository.save(any())).thenReturn(new WeatherRequestHistory());
-        BigDecimal latitude = new BigDecimal(50.222222);
-        BigDecimal longitude = new BigDecimal(30.222222);
+        Double latitude = 50.222222;
+        Double longitude = 50.222222;
         UUID userId = UUID.fromString("4ed1318b-ddc0-4a87-8331-e93eb3871392");
         
         // When

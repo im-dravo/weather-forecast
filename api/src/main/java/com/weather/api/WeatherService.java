@@ -1,6 +1,5 @@
 package com.weather.api;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -16,8 +15,8 @@ import com.weather.api.model.GetWeatherRequestHistoryResponse;
 import com.weather.domain.entity.WeatherRequestHistory;
 import com.weather.domain.model.WeatherResponse;
 import com.weather.domain.repository.WeatherRequestHistoryRepository;
-import com.weather.domain.service.WeatherDataProcessor;
 import com.weather.domain.service.WeatherClient;
+import com.weather.domain.service.WeatherDataProcessor;
 
 import lombok.RequiredArgsConstructor;
 
@@ -35,7 +34,7 @@ public class WeatherService {
 	private WeatherRequestHistoryRepository weatherRequestHistoryRepository;
 
 	@Transactional
-	public GetWarmestDayResponse retrieveWeather(BigDecimal latitude, BigDecimal longitude, UUID userId) {
+	public GetWarmestDayResponse retrieveWeather(Double latitude, Double longitude, UUID userId) {
 		WeatherResponse weatherResponse = weatherClient.retrieveWeather(latitude, longitude);
 		Optional<String> warmestDay = weatherDataProcessor.getWarmestDay(weatherResponse);
 		if (warmestDay.isPresent()) {

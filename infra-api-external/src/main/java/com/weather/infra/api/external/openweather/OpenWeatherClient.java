@@ -1,6 +1,5 @@
 package com.weather.infra.api.external.openweather;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,7 @@ public class OpenWeatherClient implements WeatherClient {
 	private WebClient webClient;
 
 	@Override
-	public WeatherResponse retrieveWeather(BigDecimal latitude, BigDecimal longitude) {
+	public WeatherResponse retrieveWeather(Double latitude, Double longitude) {
 		// TODO - Take openweather api from env config
 		// TODO - Take API key from env config
 		ResponseSpec responseSpec = webClient.get()
