@@ -46,9 +46,6 @@
 					"502": {
 						"description": "Service providers unavailable"
 					},
-					"500": {
-						"description": "Unknown Error"
-					},
 					"200": {
 						"description": "The warmest day is here! Yay!!",
 						"content": {
@@ -58,6 +55,9 @@
 								}
 							}
 						}
+					},
+					"500": {
+						"description": "Unknown Error"
 					}
 				}
 			}
@@ -184,7 +184,7 @@
 						"type": "string",
 						"enum": [
 							"WEATHER_HISTORY_REQUESTED_DATE",
-							"WEATHER_RESULT_COUNT"
+							"WEATHER_RESULTS_COUNT"
 						]
 					}
 				}
@@ -203,13 +203,13 @@
 			"WeatherRequestHistory": {
 				"type": "object",
 				"properties": {
-					"resultCount": {
-						"type": "integer",
-						"format": "int32"
-					},
 					"latitude": {
 						"type": "number",
 						"format": "double"
+					},
+					"resultsCount": {
+						"type": "integer",
+						"format": "int32"
 					},
 					"longitude": {
 						"type": "number",

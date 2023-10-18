@@ -24,13 +24,13 @@ public class WeatherRequestHistory {
 	private UUID userId;
 
 	@Getter(AccessLevel.PUBLIC)
-	private int resultCount;
-
-	@Getter(AccessLevel.PUBLIC)
 	private Double latitude;
 
 	@Getter(AccessLevel.PUBLIC)
 	private Double longitude;
+
+	@Getter(AccessLevel.PUBLIC)
+	private int resultsCount;
 
 	@Getter(AccessLevel.PUBLIC)
 	private String warmestDayIdentified;
@@ -43,12 +43,12 @@ public class WeatherRequestHistory {
 	public WeatherRequestHistory() {
 	}
 
-	public WeatherRequestHistory(UUID userId, int resultCount, Double latitude, Double longitude,
+	public WeatherRequestHistory(UUID userId, Double latitude, Double longitude, int resultsCount,
 			String warmestDayIdentified) {
 		this.userId = userId;
-		this.resultCount = resultCount;
 		this.latitude = latitude;
 		this.longitude = longitude;
+		this.resultsCount = resultsCount;
 		this.warmestDayIdentified = warmestDayIdentified;
 	}
 }

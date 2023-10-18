@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class GetWeatherRequestHistoryQuery {
 	public enum ORDER_FIELD {
-	    WEATHER_HISTORY_REQUESTED_DATE, WEATHER_RESULT_COUNT;
+	    WEATHER_HISTORY_REQUESTED_DATE, WEATHER_RESULTS_COUNT;
 	}
 	
 	@Enumerated()
@@ -19,9 +19,9 @@ public class GetWeatherRequestHistoryQuery {
 	private ORDER_FIELD orderBy;
 	
 	public String customOrderByField() {
-		if(this.orderBy == null) { 
-			return "requestedOn";
+		if(this.orderBy == null || this.orderBy == ORDER_FIELD.WEATHER_RESULTS_COUNT) { 
+			return "resultsCount";
 		} 
-		return "resultCount";
+		return "requestedOn";
 	}
 }

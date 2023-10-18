@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,8 +39,8 @@ public class WeatherService {
 		WeatherResponse weatherResponse = weatherClient.retrieveWeather(latitude, longitude);
 		Optional<String> warmestDay = weatherDataProcessor.getWarmestDay(weatherResponse);
 		if (warmestDay.isPresent()) {
-			this.saveWeatherRequestHistory(new WeatherRequestHistory(userId, weatherResponse.getResultCount(), latitude,
-					longitude, warmestDay.get()));
+			this.saveWeatherRequestHistory(new WeatherRequestHistory(userId, latitude, longitude,
+					weatherResponse.getResultCount(), warmestDay.get()));
 			return new GetWarmestDayResponse(warmestDay.get());
 		} else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Weather not found");
@@ -55,7 +56,7 @@ public class WeatherService {
 	@Transactional(readOnly = true)
 	public GetWeatherRequestHistoryResponse findByUserId(UUID userId, String orderingField) {
 		List<WeatherRequestHistory> weatherHistory = weatherRequestHistoryRepository.findByUserId(userId,
-				orderingField);
+				Sort.by(Sort.Direction.DESC, orderingField));
 		if (weatherHistory.isEmpty()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No history found for requested user.");
 		}
